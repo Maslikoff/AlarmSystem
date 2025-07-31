@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Crook : MonoBehaviour
 {
     [SerializeField] private Transform[] _points;
-    [SerializeField] private float _speed = 2f;
+    [SerializeField] private float _moveSpeed = 2f;
+    [SerializeField] private float _rotationSpeed = 5f;
     [SerializeField] private float _waitTime = 2f;
 
     private int _currentPointIndex = 0;
@@ -23,7 +23,9 @@ public class Crook : MonoBehaviour
             return;
 
         Transform target = _points[_currentPointIndex];
-        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, _moveSpeed * Time.deltaTime);
+
+        LookAtTarget(target);
 
         if ((transform.position - _points[_currentPointIndex].position).sqrMagnitude <= 0.25f)
             StartCoroutine(WaitAtWaypoint());
@@ -36,5 +38,16 @@ public class Crook : MonoBehaviour
 
         _currentPointIndex = (_currentPointIndex + 1) % _points.Length;
         _isWaiting = false;
+    }
+
+    private void LookAtTarget(Transform target)
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        }
     }
 }

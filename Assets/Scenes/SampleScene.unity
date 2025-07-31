@@ -1292,6 +1292,7 @@ GameObject:
   - component: {fileID: 1762460960}
   - component: {fileID: 1762460959}
   - component: {fileID: 1762460958}
+  - component: {fileID: 1762460962}
   - component: {fileID: 1762460957}
   m_Layer: 0
   m_Name: Crook
@@ -1315,7 +1316,8 @@ MonoBehaviour:
   _points:
   - {fileID: 408439025}
   - {fileID: 605798164}
-  _speed: 2
+  _moveSpeed: 2
+  _rotationSpeed: 5
   _waitTime: 2
 --- !u!136 &1762460958
 CapsuleCollider:
@@ -1406,6 +1408,33 @@ Transform:
   - {fileID: 1701779982}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1762460962
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762460956}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
