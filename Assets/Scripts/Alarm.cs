@@ -1,26 +1,20 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent (typeof(HouseEvents))]
+[RequireComponent (typeof(HouseTrigger))]
 public class Alarm : MonoBehaviour
 {
     [SerializeField] private AudioSource _alarmSound;
     [SerializeField] private float _volumeChangeSpeed = .5f;
 
-    private HouseEvents _houseEvents;
     private Coroutine _volumeCoroutine;
 
     private void Awake()
     {
-        _houseEvents = GetComponent<HouseEvents>();
-
         _alarmSound.volume = 0f;
-
-        _houseEvents.CrookEntered += OnCrookEntered;
-        _houseEvents.CrookExited += OnCrookExited;
     }
 
-    private void OnCrookEntered()
+    public void ActivateAlarm()
     {
         if (_volumeCoroutine != null)
             StopCoroutine(_volumeCoroutine);
@@ -31,7 +25,7 @@ public class Alarm : MonoBehaviour
             _alarmSound.Play();
     }
 
-    private void OnCrookExited()
+    public void DeactivateAlarm()
     {
         if (_volumeCoroutine != null)
             StopCoroutine(_volumeCoroutine);
@@ -54,9 +48,6 @@ public class Alarm : MonoBehaviour
 
     private void OnDestroy()
     {
-        _houseEvents.CrookEntered -= OnCrookEntered;
-        _houseEvents.CrookExited -= OnCrookExited;
-
         if (_volumeCoroutine != null)
             StopCoroutine(_volumeCoroutine);
     }

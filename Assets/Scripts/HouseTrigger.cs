@@ -1,20 +1,18 @@
-using System;
 using UnityEngine;
 
-public class HouseEvents : MonoBehaviour
+public class HouseTrigger : MonoBehaviour
 {
-    public event Action CrookEntered;
-    public event Action CrookExited;
+    [SerializeField] private Alarm _alarm;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Crook>(out _))
-            CrookEntered?.Invoke();
+            _alarm?.ActivateAlarm();
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent<Crook>(out _))
-            CrookExited?.Invoke();
+            _alarm?.DeactivateAlarm();
     }
 }
