@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _alarmSound: {fileID: 1177556515}
-  _volumeChangeSpeed: 0.5
+  _volumeChangeSpeed: 2
 --- !u!114 &477483674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,7 +693,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cc1f4d4aa96120647afb3e964ae561ca, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
