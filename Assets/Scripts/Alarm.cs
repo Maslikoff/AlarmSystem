@@ -14,6 +14,12 @@ public class Alarm : MonoBehaviour
         _alarmSound.volume = 0f;
     }
 
+    private void OnDestroy()
+    {
+        if (_volumeCoroutine != null)
+            StopCoroutine(_volumeCoroutine);
+    }
+
     public void ActivateAlarm()
     {
         if (_volumeCoroutine != null)
@@ -44,11 +50,5 @@ public class Alarm : MonoBehaviour
 
         if (Mathf.Approximately(targetVolume, 0f))
             _alarmSound.Stop();
-    }
-
-    private void OnDestroy()
-    {
-        if (_volumeCoroutine != null)
-            StopCoroutine(_volumeCoroutine);
     }
 }
