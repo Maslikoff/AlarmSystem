@@ -14,6 +14,8 @@ public class Alarm : MonoBehaviour
     {
         _houseEvents = GetComponent<HouseEvents>();
 
+        _alarmSound.volume = 0f;
+
         _houseEvents.CrookEntered += OnCrookEntered;
         _houseEvents.CrookExited += OnCrookExited;
     }
@@ -39,17 +41,12 @@ public class Alarm : MonoBehaviour
 
     private IEnumerator FadeVolume(float targetVolume)
     {
-        float startVolume = _alarmSound.volume;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < _volumeChangeSpeed)
+        while (Mathf.Approximately(_alarmSound.volume, targetVolume) == false)
         {
-            _alarmSound.volume = Mathf.MoveTowards(startVolume, targetVolume, elapsedTime/_volumeChangeSpeed); 
-            elapsedTime += Time.deltaTime;
+            _alarmSound.volume = Mathf.MoveTowards(_alarmSound.volume, targetVolume, _volumeChangeSpeed * Time.deltaTime);
+
             yield return null;
         }
-
-        _alarmSound.volume = targetVolume;
 
         if (Mathf.Approximately(targetVolume, 0f))
             _alarmSound.Stop();
